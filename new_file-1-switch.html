@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box{
+				height: 416px;
+				width: 730px;
+				background-color: gainsboro;
+			}
+			
+			.box .title{
+				height: 40px;
+				line-height: 40px;
+				border-bottom: 1px gray solid;
+			}
+			ul.title{
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				position: relative;
+			}
+			
+			ul.title span.liner{
+				height: 2px;
+				background-color: lightskyblue;
+				position: absolute;
+				top: 38px;
+				left: 0px;
+				width: 94px;
+				display: block;
+			}
+			
+			
+			.title li{
+				float: left;
+				width: 94px;
+				text-align: center;
+			}
+			
+			.title li.active{
+				font-weight: 700;
+				
+			}
+			.title li.active a{
+				
+				color: firebrick;
+			}
+			.title a{
+				text-decoration: none;
+				color: #535353;
+			}
+			
+			.item{
+				width: 100%;
+				height: 416px;
+				display: none;
+			}
+			
+			.item-1{
+				background-color: grey;
+				display: block;
+			}
+			
+			
+			.item-2{
+				background-color: seagreen;
+			}
+			
+			.item-3{
+				background-color: cornflowerblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			
+			<ul class="title">
+				<li class="active"><a href="#">学院动态</a></li>
+				<li ><a href="#">行业观察</a></li>
+				<li ><a href="#">学习资讯</a></li>
+				
+				
+				<span class="liner"></span>
+			</ul>
+			<div class="list">
+				<div class="item item-1"></div>
+				<div class="item item-2"></div>
+				<div class="item item-3"></div>
+				
+				
+			</div>
+			
+		</div>
+		
+		<script type="text/javascript" src="js/jquery-2.1.0.js" ></script>
+		
+		<script type="text/javascript">
+			
+			
+			var tab = $(".title li");
+			var items = $(".box .item");
+			
+			tab.hover(function(){
+				var index = $(this).index();
+				tab.removeClass("active");
+				$(this).addClass("active");
+				
+				
+				$(".liner").stop(true,true).animate({
+					left:(index*94)+"px"
+				},100);
+				
+				items.hide();
+				items.eq(index).show();
+				
+			});
+		</script>
+	</body>
+</html>

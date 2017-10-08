@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/new_file.css"/>
+		<script type="text/javascript" src="js/jquery-2.1.0.js" ></script>
+		
+		
+	</head>
+	<body>
+		<div class="side-ad">
+			<img src="img/icon_on_101405581489297744.gif"/>
+		</div>
+		<div class="top">
+			<div class="w">
+				<ul class="left">
+					<li><a href="#">首页<span class="row"></span></a>
+						<ul class="sub-nav">
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+						</ul>	
+					</li>
+					<li><a href="#">学院介绍<span class="row"></span>
+						<ul class="sub-nav">
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+						</ul>	
+					</a>
+						
+						</li>
+					<li><a href="#">课程导航<span class="row"></span></a>
+						<ul class="sub-nav">
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+							<li><a href="#">学院介绍</a></li>
+						</ul>	
+					</li>
+					<li><a href="#">师资力量<span class="row"></span></a>
+						
+					</li>
+					<li><a href="#">学员作品<span class="row"></span></a>
+						
+					</li>
+					<li><a href="#">学历考证<span class="row"></span></a></li>
+					<li><a href="#">就业信息<span class="row"></span></a></li>
+					<li><a href="#">学习资讯<span class="row"></span></a></li>
+					<li><a href="#">入学须知<span class="row"></span></a></li>
+				</ul>	
+				
+					
+				<div class="wechat right">
+					<ul>					
+							<img src="img/wx.png"/>						
+					</ul>
+				</div>
+
+			</div>
+				
+		</div>
+		<div class="head ">
+			<div class="logo">
+				<a href="#">
+					<img src="img/logo.png"/>
+				</a>
+			</div>
+			<div class="text">
+					<p>教育培训领先品牌</p>
+			</div>
+			<div class="ad">
+				<img src="img/PxCook-Temp_03 (2).png"/>
+			</div>
+			<div class="tel ">
+				<a href="#">
+				<img src="img/PxCook-Temp_01_09.png"/>					
+				</a>
+			</div>
+		</div>
+		
+		
+		<div class="banner">
+				<ul>
+				<li><img src="img/201702081649028.jpg"/></li>
+				<li><img src="img/201603231622547.jpg"/></li>
+				<li><img src="img/201706191500366.jpg"/></li>
+				<li><img src="img/201610101628469.jpg"/></li>
+				<li><img src="img/1423-400-31.jpg"/></li>
+				<li><img src="img/201702091426261.jpg"/></li>
+				<li><img src="img/201702091427415.jpg"/></li>
+				<li><img src="img/201702101151185.jpg"/></li>
+				<li><img src="img/201702101151346.jpg"/></li>
+				<li><img src="img/201702270855564.jpg"/></li>
+			</ul>
+			<div class="points"></div>
+			
+			
+		</div>
+		
+		<script type="text/javascript">
+			
+			$(document).ready(function(){
+				var ul=$(".banner ul");
+				var count=$(".banner li").length;
+				var imageWidth=$(".banner").width();
+				var index = 0 ;
+				var points=$(".points");
+				
+				for (var i = 0 ; i<count;i++) {
+					points.append("<span></span>")
+				}
+				
+				points.css("margin-left",-12*count+"px").children("span").eq(0).addClass("active");
+				
+				var first = $(".banner ul li:first-child").clone();
+				var last  = $(".banner ul li:last-child").clone();
+				
+					ul.append(first);
+
+
+					ul.width((count+1)*imageWidth);
+					
+					var t = setInterval(function(){
+						index = (index+1)%count;
+						imageSwitch(index);
+					},3000);
+					
+					$(".box").hover(function(){
+						clearInterval(t);
+					},function(){
+						t= setInterval(function(){
+							index=(index+1)%count;
+							imageSwitch(index);
+						},3000);
+					});
+					
+					points.children("span").hover(function(){
+						index = $(this).index();
+						imageSwitch(index);
+					});
+					
+				
+				function imageSwitch(i){
+					
+					ul.stop(true,true);
+					
+					points.children("span").removeClass("active").eq(index).addClass("active");
+					
+					if((index==0)&&(parseInt(ul.css("left"))<(imageWidth*-2))){
+						ul.animate({
+							left:(count+1)*imageWidth*-1+"px"
+						},500,function(){
+							ul.css("left",-1*imageWidth+"px");
+						});
+						
+					}else if(i==(count-1)&&(parseInt(ul.css("left"))>(imageWidth*-2))){
+						ul.animate({
+							left:'0px'
+							
+						},500,function(){
+							ul.css("left",-1*count*imageWidth+"px");
+						});
+						
+						
+					}else{
+						
+						ul.animate({
+							left:(i+1)*imageWidth*-1+"px"
+						},500);
+						
+						
+					}
+					
+				};
+				
+				
+			});
+			
+		</script>
+		
+		<div class="main">
+			<!--左侧菜单-->
+			<div class="category">
+				
+				<div class="title">
+				全部分类
+			</div>
+			
+			<ul>
+				<li><a href="#">分类1</a></li>
+				<li><a href="#">分类2</a></li>
+				<li><a href="#">分类3</a></li>
+				<li><a href="#">分类4</a></li>
+				<li><a href="#">分类5</a></li>
+				<li><a href="#">分类6</a></li>
+				<li><a href="#">分类7</a></li>
+				<li><a href="#">分类8</a></li>
+				<li><a href="#">分类9</a></li>
+				<li><a href="#">分类10</a></li>
+			</ul>	
+			
+			<div class="sub-category">
+				<div class="item item-1"></div>
+				<div class="item item-2"></div>
+				<div class="item item-3"></div>
+				<div class="item item-4"></div>
+				<div class="item item-5"></div>
+				<div class="item item-6"></div>
+				<div class="item item-7"></div>
+				<div class="item item-8"></div>
+				<div class="item item-9"></div>
+				<div class="item item-10"></div>
+			</div>
+				
+				
+				
+			</div>
+			
+			
+			<script type="text/javascript">
+			
+			var cats = $(".category ul li");
+			
+			$(".category").hover(function(){},function(){
+				cats.removeClass("active");
+				$(".sub-category").hide();				
+			});
+		
+			
+			cats.hover(function(){
+				var index = $(this).index();
+				cats.removeClass("active");
+				$(this).addClass("active");
+				
+				$(".sub-category").show();
+				$(".sub-category .item").hide().eq(index).show();
+			});
+			
+			
+			
+		</script>
+			<!--中间菜单-->
+			<div class="box">
+				
+				
+				<ul class="title">
+				<li class="active"><a href="#">学院动态</a></li>
+				<li ><a href="#">行业观察</a></li>
+				<li ><a href="#">学习资讯</a></li>
+				
+				
+				<span class="liner"></span>
+			</ul>
+			<div class="list">
+				<div class="item item-1"></div>
+				<div class="item item-2"></div>
+				<div class="item item-3"></div>
+				
+				
+			</div>
+				
+			</div>
+			
+			
+			<script type="text/javascript">
+			
+			
+			var tab = $(".title li");
+			var items = $(".box .item");
+			
+			tab.hover(function(){
+				var index = $(this).index();
+				tab.removeClass("active");
+				$(this).addClass("active");
+				
+				
+				$(".liner").stop(true,true).animate({
+					left:(index*94)+"px"
+				},100);
+				
+				items.hide();
+				items.eq(index).show();
+				
+			});
+		</script>
+		
+		
+			<!--右侧菜单-->
+			<div class="new-class"></div>
+			
+		</div>
+		
+
+		<div style="height: 5000px;"></div>
+	
+		<script type="text/javascript" src="js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="js/jquery.easing.min.js" ></script>
+		
+		<script type="text/javascript">
+			$(".top ul li").hover(function(){
+				$(this).children("ul").slideDown(200);
+				$(this).addClass("active");
+				
+			},function(){
+				$(this).children("ul").slideUp(200);
+				$(this).removeClass("active");
+			});
+			
+			
+			$(document).ready(function(){
+				
+				var h=$(window).height();
+				var sh=$(".side-ad").height();
+				
+				
+				var offsetTop = $(window).scrollTop();
+				var top = (h-sh)/2;
+				$(".side-ad").css("top",top+offsetTop+"px");
+				
+				$(document).scroll(function(){
+					
+					offsetTop = $(window).scrollTop();
+					$(".side-ad").stop(true,true).animate({top:top+offsetTop+"px"},1000,"easeOutBack")
+				});
+				
+			});
+			
+			
+		</script>
+		
+	</body>
+</html>

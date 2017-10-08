@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box{
+				width: 1200px;
+				height: 350px;
+				/*border: 1px gray solid;*/
+				margin: 50px auto;
+				position: relative;
+				overflow: hidden;
+			}
+			.box ul {
+				margin: 0;
+				padding: 0;
+				position: absolute;
+				top: 0;
+				left: 0;
+				list-style: none;
+			}
+			.box ul li{
+				float: left;
+				width: 1200px;
+				height: 350px;			
+			}
+			.box ul li img{
+				width: 1200px;
+				height: 350px;
+			}
+			.points{
+				position: absolute;
+				bottom: 20px;	
+				left: 50%;
+			}
+			.points span{
+				background-color: gray;
+				display: block;
+				width: 16px;
+				height: 16px;	
+				float: left;
+				margin: 4px;	
+				border-radius: 50%;		
+			}
+			.points span.active{
+				background-color: gainsboro;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<ul>
+				<li><img src="img/201702081649028.jpg"/></li>
+				<li><img src="img/201603231622547.jpg"/></li>
+				<li><img src="img/201706191500366.jpg"/></li>
+				<li><img src="img/201610101628469.jpg"/></li>
+				<li><img src="img/1423-400-31.jpg"/></li>
+				<li><img src="img/201702091426261.jpg"/></li>
+				<li><img src="img/201702091427415.jpg"/></li>
+				<li><img src="img/201702101151185.jpg"/></li>
+				<li><img src="img/201702101151346.jpg"/></li>
+				<li><img src="img/201702270855564.jpg"/></li>
+			</ul>
+			<div class="points"></div>
+		</div>
+		<script type="text/javascript" src="js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript">
+			
+			$(document).ready(function(){
+				var ul=$(".box ul");
+				var count=$(".box li").length;
+				var imageWidth=$(".box").width();
+				var index = 0 ;
+				var points=$(".points");
+				
+				for (var i = 0 ; i<count;i++) {
+					points.append("<span></span>")
+				}
+				
+				points.css("margin-left",-12*count+"px").children("span").eq(0).addClass("active");
+				
+				var first = $(".box ul li:first-child").clone();
+				var last  = $(".box ul li:last-child").clone();
+				
+					ul.append(first);
+
+
+					ul.width((count+1)*imageWidth);
+					
+					var t = setInterval(function(){
+						index = (index+1)%count;
+						imageSwitch(index);
+					},3000);
+					
+					$(".box").hover(function(){
+						clearInterval(t);
+					},function(){
+						t= setInterval(function(){
+							index=(index+1)%count;
+							imageSwitch(index);
+						},3000);
+					});
+					
+					points.children("span").hover(function(){
+						index = $(this).index();
+						imageSwitch(index);
+					});
+					
+				
+				function imageSwitch(i){
+					
+					ul.stop(true,true);
+					
+					points.children("span").removeClass("active").eq(index).addClass("active");
+					
+					if((index==0)&&(parseInt(ul.css("left"))<(imageWidth*-2))){
+						ul.animate({
+							left:(count+1)*imageWidth*-1+"px"
+						},500,function(){
+							ul.css("left",-1*imageWidth+"px");
+						});
+						
+					}else if(i==(count-1)&&(parseInt(ul.css("left"))>(imageWidth*-2))){
+						ul.animate({
+							left:'0px'
+							
+						},500,function(){
+							ul.css("left",-1*count*imageWidth+"px");
+						});
+						
+						
+					}else{
+						
+						ul.animate({
+							left:(i+1)*imageWidth*-1+"px"
+						},500);
+						
+						
+					}
+					
+				};
+				
+				
+			});
+			
+		</script>
+	</body>
+</html>
